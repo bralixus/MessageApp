@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewData["Title"]</title>
+    <link href="@Url.Content("~/Content/bootstrap-reboot.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet" />
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery-3.0.0.min.js")"></script>
+</head>
+<body>
+    <div class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <div class="navbar-brand">
+                @Html.ActionLink("MessageApp", "Index", "Home", null, new { @class = "navbar-brand" });
+            </div>
+            <div class="navbar-collapse">
+                <ul class="navbar-nav mr-auto">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li class="nav-iteam">
+                            @Html.ActionLink("Kanały", "Index", "Channel", null, new { @class = "nav-link" })
+                        </li>
+                        <li class="nav-iteam">
+                            @Html.ActionLink("Wiadomości", "Index", "Message", null, new { @class = "nav-link" })
+                        </li>
+                        <li class="nav-iteam">
+                            <span class="nav-link">
+                                @User.Identity.Name
+                                @Html.ActionLink("[Wyloguj]", "Logout", "Account")
+                            </span>
+                        </li>
+                        }
+                        else
+                        {
+                        <li class="nav-iteam">
+                            @Html.ActionLink("Zaloguj", "Login", "Account", null, new { @class = "nav-link" })
+                        </li>
+                        <li class="nav-iteam">
+                            @Html.ActionLink("Zarejestruj", "Register", "Account")
+                        </li>
+                        }
+                    </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+</body>
+</html>

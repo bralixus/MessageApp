@@ -1,0 +1,55 @@
+﻿@model MessageApp.Models.DataBase.Channel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Channel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+    </dl>
+    @Html.ActionLink("Dodaj wpis", "Create", "Message", new{channelId = Model.Id}, null)
+    <table>
+        <tr>
+            <th>Treść</th>
+            <th>Data utworzenia</th>
+        </tr>
+        @if (Model.Messages == null || Model.Messages.Count == 0)
+        {
+            <tr>
+                <td colspan="2">
+                    Brak wiadomości
+                </td>
+            </tr>
+        }
+        else
+        {
+            foreach (var message in Model.Messages)
+            {
+                <tr>
+                    <td>
+                        @message.Content
+                    </td>
+                    <td>
+                        @message.CreatedDate
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
